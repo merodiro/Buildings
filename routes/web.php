@@ -44,6 +44,8 @@ Route::group(['prefix' => 'buildings'], function () {
     Route::get('type/{id}', 'BuildingController@byType');
 
     Route::get('search', 'BuildingController@search');
+
+    Route::get('{building}', 'BuildingController@show');
 });
 
 

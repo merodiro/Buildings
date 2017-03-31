@@ -44,8 +44,36 @@
                 <ul class="nav" id="nav">
                     <li class="current"><a href="{{ url('/home') }}">الرئيسية</a></li>
                     <li><a href="{{ url('/buildings') }}">كل العقارات</a></li>
-                    <li><a href="about.html">من نحن</a></li>
-                    <li><a href="services.html">خدماتنا</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            إيجار
+                            <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            @foreach(building_type() as $key => $type)
+                                <li style="width: 100%">
+                                    <a href="{{ url('/buildings/search?rent=1&&type=' . $key) }}"> {{ $type }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            تمليك
+                            <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            @foreach(building_type() as $key => $type)
+                                <li style="width: 100%">
+                                    <a href="{{ url('/buildings/search?rent=0&&type=' . $key) }}"> {{ $type }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+
                     <li><a href="contact.html">اتصل بنا</a></li>
                     @if (Auth::guest())
                         <li><a href="{{ route('login') }}">تسجيل الدخول</a></li>
@@ -61,6 +89,7 @@
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
+                                        <i class="fa fa-btn fa-sign-out"></i>
                                         تسجيل الخروج
                                     </a>
 

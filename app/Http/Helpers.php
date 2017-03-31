@@ -1,6 +1,7 @@
 <?php
 
 use App\Setting;
+use Illuminate\Support\Facades\DB;
 
 function getSetting($setting = 'sitename')
 {
@@ -34,10 +35,8 @@ function building_status()
 
 function room_number()
 {
-    $arr = [];
-    for ($i = 2; $i <= 40; $i++) {
-        $arr[$i] = $i;
-    }
+    $arr = DB::table('buildings')->select('rooms')->orderBy('rooms')->distinct()->pluck('rooms')->toArray();
+    $arr = array_combine($arr, $arr);
     return $arr;
 }
 

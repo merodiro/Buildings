@@ -73,4 +73,11 @@ class BuildingController extends Controller
             ->paginate(15);
         return view('website.building.index', compact('buildings', 'search'));
     }
+
+    public function show(Building $building)
+    {
+        $similar_rent = Building::where('rent', $building->rent)->inRandomOrder()->take(3)->get();
+        $similar_type = Building::where('type', $building->type)->inRandomOrder()->take(3)->get();
+        return view('website.building.show', compact('building', 'similar_rent', 'similar_type'));
+    }
 }

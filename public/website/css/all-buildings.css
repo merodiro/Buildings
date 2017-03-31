@@ -161,3 +161,11 @@ hr {
 .label-search {
     margin: 5px;
 }
+
+.label-search a {
+    color: #fff;
+}
+
+.label-search a:hover {
+    text-decoration: none;
+}

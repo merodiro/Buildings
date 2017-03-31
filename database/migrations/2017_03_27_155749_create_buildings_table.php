@@ -17,9 +17,9 @@ class CreateBuildingsTable extends Migration
             $table->increments('id');
             $table->string('name', 100);
             $table->tinyInteger('city')->unsigned();
-            $table->double('price');
-            $table->tinyInteger('rooms')->unsigned;
-            $table->tinyInteger('rent');
+            $table->integer('price');
+            $table->tinyInteger('rooms')->unsigned();
+            $table->boolean('rent');
             $table->double('area');
             $table->integer('type')->unsigned();
             $table->string('short_description', 160);
