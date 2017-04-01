@@ -35,6 +35,8 @@ class BuildingRequest extends FormRequest
             'longitude' => 'required|numeric',
             'latitude' => 'required|numeric',
             'full_description' => 'required|min:5',
+            'city' => 'required',
+            'image' => 'mimes:jpeg,jpg,png',
         ];
     }
 }

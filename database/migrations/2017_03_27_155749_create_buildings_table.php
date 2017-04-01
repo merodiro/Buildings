@@ -28,6 +28,7 @@ class CreateBuildingsTable extends Migration
             $table->double('latitude');
             $table->text('full_description');
             $table->boolean('status');
+            $table->string('image')->nullable();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
 

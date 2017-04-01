@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ getSetting('sitename') }} | @yield('title')</title>
+    <title>{{ config('settings.sitename') }} | @yield('title')</title>
 
     {{-- {!! Html::style('website/css/bootstrap.min.css') !!}
     {!! Html::style('website/css/flexslider.css') !!}
@@ -39,7 +39,7 @@
 <div id="app" style="direction: rtl">
 
     <div class="header">
-        <div class="container"> <a class="navbar-brand" href="{{ url('/') }}"><i class="fa fa-paper-plane"></i> {{ getSetting() }}</a>
+        <div class="container"> <a class="navbar-brand" href="{{ url('/') }}"><i class="fa fa-paper-plane"></i> {{ config('settings.sitename') }}</a>
             <div class="menu pull-right"> <a class="toggleMenu" href="#"><img src="{{ url('/images/nav_icon.png') }}" alt="" /> </a>
                 <ul class="nav" id="nav">
                     <li class="current"><a href="{{ url('/home') }}">الرئيسية</a></li>
@@ -112,9 +112,9 @@
     <div class="footer">
         <div class="footer_bottom">
             <div class="follow-us">
-                <a class="fa fa-facebook social-icon" href="{{ getSetting('facebook') }}"></a>
-                <a class="fa fa-twitter social-icon" href="{{ getSetting('twitter') }}"></a>
-                <a class="fa fa-youtube social-icon" href="{{ getSetting('youtube') }}"></a>
+                <a class="fa fa-facebook social-icon" href="{{ config('settings.facebook') }}"></a>
+                <a class="fa fa-twitter social-icon" href="{{ config('settings.twitter') }}"></a>
+                <a class="fa fa-youtube social-icon" href="{{ config('settings.youtube') }}"></a>
                 <div class="copy">
                     <p>Copyright &copy; 2015 Company Name. Design by <a href="http://www.templategarden.com" rel="nofollow">TemplateGarden</a></p>
                 </div>

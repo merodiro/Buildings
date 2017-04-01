@@ -26,6 +26,26 @@
     </div>
 </div>
 
+<div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+
+    {!! Form::label('image', 'صورة العقار', ['class' => 'col-md-4 control-label']) !!}
+
+    <div class="col-md-6">
+        @if(isset($building) && $building->image)
+            <img src="{{ Storage::url($building->image) }}" style="width: 100px">
+            <div class="clearfix">  </div>
+            <br>
+        @endif
+        {!! Form::file('image', null , ['class' => 'form-control', 'placeholder' => 'ادخل صورة العقار', 'required' => 'required']) !!}
+
+        @if ($errors->has('image'))
+            <span class="help-block">
+                    <strong>{{ $errors->first('image') }}</strong>
+                </span>
+        @endif
+    </div>
+</div>
+
 <div class="form-group{{ $errors->has('rooms') ? ' has-error' : '' }}">
     {!! Form::label('rooms', 'عدد الغرف', ['class' => 'col-md-4 control-label']) !!}
 

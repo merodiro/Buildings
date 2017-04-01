@@ -6,6 +6,7 @@ use App\Building;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BuildingRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Yajra\Datatables\Facades\Datatables;
 
 class BuildingController extends Controller
@@ -23,8 +24,22 @@ class BuildingController extends Controller
 
     public function store(BuildingRequest $request)
     {
+        $this->validate($request, [
+            'image' => 'required|mimes:jpeg,jpg,png'
+        ]);
+
         $status = $request->has('status');
-        Auth::user()->buildings()->create($request->except('status') + ['status' => $status]);
+
+        $building = Auth::user()->buildings()
+            ->create($request->except('status') + ['status' => $status]);
+
+        if ($request->file('image'))
+        {
+            $dim = getimagesize($request->file('image'));
+            $image = $request->image->store('public/buildings');
+            $building->image = $image;
+            $building->save();
+        }
 
         return redirect('admin/buildings')->with('message', 'تم اضافة العقار بنجاح');
     }
@@ -38,7 +53,19 @@ class BuildingController extends Controller
     public function update(BuildingRequest $request, Building $building)
     {
         $status = $request->has('status');
-        $building->update($request->except('status') + ['status' => $status]);
+
+        $building->fill($request->except(['status', 'image']));
+        $building->status = $status;
+
+        if ($request->file('image'))
+        {
+            $image = $request->file('image')->store('public/buildings');
+
+            $building->image = $image;
+        }
+
+
+        $building->save();
 
         return back()->with('message', 'تم تعديل العقار بنجاح');
     }

@@ -47,10 +47,16 @@
                     </div>
 
                     <hr>
+
+                    <img src="{{ checkIfImageExists($building->image) }}" alt="" class="img-responsive">
+
+                    <hr>
+
                     <p>
                         {!!  nl2br($building->full_description) !!}
                     </p>
                     <br>
+
                     <div id="map" style="width:100%;height:500px"></div>
                 </div>
                 <br>
@@ -76,7 +82,6 @@
         function myMap() {
             var mapCanvas = document.getElementById("map");
             var myCenter = new google.maps.LatLng({{ $building->latitude }}, {{ $building->longitude }});
-//            var myCenter = new google.maps.LatLng(0, 0);
             var mapOptions = {center: myCenter, zoom: 5};
             var map = new google.maps.Map(mapCanvas, mapOptions);
             var marker = new google.maps.Marker({

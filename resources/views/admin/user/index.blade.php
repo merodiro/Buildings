@@ -1,29 +1,29 @@
 @extends('admin.layouts.app')
 
 @section('title')
-	التحكم فى الاعضاء
+    التحكم فى الاعضاء
 @endsection
 
 @section('head')
-	<!-- DataTables -->
-	{!! Html::style('admin-assets/plugins/datatables/dataTables.bootstrap.css') !!}
+    <!-- DataTables -->
+    {!! Html::style('admin-assets/plugins/datatables/dataTables.bootstrap.css') !!}
 @endsection
 
 
 @section('content')
-	<!-- Content Header (Page header) -->
-	<section class="content-header">
-		<h1>
-			التحكم فى الأعضاء
-		</h1>
-		<ol class="breadcrumb">
-			<li><a href="{{ url('/admin') }}"><i class="fa fa-dashboard"></i> الرئيسية</a></li>
-			<li class="active"><a href="/admin/users">التحكم فى الأعضاء</a></li>
-		</ol>
-	</section>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            التحكم فى الأعضاء
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ url('/admin') }}"><i class="fa fa-dashboard"></i> الرئيسية</a></li>
+            <li class="active"><a href="/admin/users">التحكم فى الأعضاء</a></li>
+        </ol>
+    </section>
 
-	<!-- Main content -->
-	<section class="content">
+    <!-- Main content -->
+    <section class="content">
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
@@ -32,34 +32,34 @@
                             التحكم فى الأعضاء
                         </h3>
                     </div>
-			        <!-- /.box-header -->
+                    <!-- /.box-header -->
                     <div class="box-body">
                         <table id="data" class="table table-bordered table-hover">
                             <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>اسم المستخدم</th>
-                                    <th>البريد الالكترونى</th>
-                                    <th>اضيف فى</th>
-                                    <th>الصلاحيات</th>
-                                    <th>التحكم</th>
-                                </tr>
-				            </thead>
+                            <tr>
+                                <th>#</th>
+                                <th>اسم المستخدم</th>
+                                <th>البريد الالكترونى</th>
+                                <th>اضيف فى</th>
+                                <th>الصلاحيات</th>
+                                <th>التحكم</th>
+                            </tr>
+                            </thead>
                             <tbody>
                             </tbody>
                             <tfoot>
-                                <tr>
-                                    <th>#</th>
-                                    <th>اسم المستخدم</th>
-                                    <th>البريد الالكترونى</th>
-                                    <th>اضيف فى</th>
-                                    <th>الصلاحيات</th>
-                                    <th>التحكم</th>
-                                </tr>
+                            <tr>
+                                <th>#</th>
+                                <th>اسم المستخدم</th>
+                                <th>البريد الالكترونى</th>
+                                <th>اضيف فى</th>
+                                <th>الصلاحيات</th>
+                                <th>التحكم</th>
+                            </tr>
                             </tfoot>
                         </table>
                     </div>
-			        <!-- /.box-body -->
+                    <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
             </div>
@@ -72,7 +72,7 @@
 
 
 @section('footer')
-	<!-- DataTables -->
+    <!-- DataTables -->
     {!! Html::script('admin-assets/plugins/datatables/jquery.dataTables.min.js') !!}
     {!! Html::script('admin-assets/plugins/datatables/dataTables.bootstrap.min.js') !!}
 
@@ -81,16 +81,16 @@
 
         var lastIdx = null;
 
-        $('#data thead th').each( function () {
-            if($(this).index()  < 4 ){
-                var classname = $(this).index() == 6  ?  'date' : 'dateslash';
+        $('#data thead th').each(function () {
+            if ($(this).index() < 4) {
+                var classname = $(this).index() == 6 ? 'date' : 'dateslash';
                 var title = $(this).html();
-                $(this).html( '<input type="text" class="' + classname + '" data-value="'+ $(this).index() +'" placeholder=" البحث '+title+'" />' );
-            }else if($(this).index() == 4){
-                $(this).html( '<select><option value="0"> عضو </option><option value="1"> مدير الموقع </option></select>' );
+                $(this).html('<input type="text" class="' + classname + '" data-value="' + $(this).index() + '" placeholder=" البحث ' + title + '" />');
+            } else if ($(this).index() == 4) {
+                $(this).html('<select><option value="0"> عضو </option><option value="1"> مدير الموقع </option></select>');
             }
 
-        } );
+        });
 
         var table = $('#data').DataTable({
             processing: true,
@@ -145,10 +145,9 @@
             },
 
             "dom": '<"pull-left text-left" T><"pullright" i><"clearfix"><"pull-right text-right col-lg-6" f > <"pull-left text-left" l><"clearfix">rt<"pull-right text-right col-lg-6" pi > <"pull-left text-left" l><"clearfix"> '
-            ,initComplete: function ()
-            {
+            , initComplete: function () {
                 var r = $('#data tfoot tr');
-                r.find('th').each(function(){
+                r.find('th').each(function () {
                     $(this).css('padding', 8);
                 });
                 $('#data thead').append(r);
@@ -157,46 +156,44 @@
 
         });
 
-        table.columns().eq(0).each(function(colIdx) {
-            $('input', table.column(colIdx).header()).on('keyup change', function() {
+        table.columns().eq(0).each(function (colIdx) {
+            $('input', table.column(colIdx).header()).on('keyup change', function () {
                 table
                         .column(colIdx)
                         .search(this.value)
                         .draw();
             });
-
-
 
 
         });
 
 
-        table.columns().eq(0).each(function(colIdx) {
-            $('select', table.column(colIdx).header()).on('change', function() {
+        table.columns().eq(0).each(function (colIdx) {
+            $('select', table.column(colIdx).header()).on('change', function () {
                 table
                         .column(colIdx)
                         .search(this.value)
                         .draw();
             });
 
-            $('select', table.column(colIdx).header()).on('click', function(e) {
+            $('select', table.column(colIdx).header()).on('click', function (e) {
                 e.stopPropagation();
             });
         });
 
 
         $('#data tbody')
-                .on( 'mouseover', 'td', function () {
+                .on('mouseover', 'td', function () {
                     var colIdx = table.cell(this).index().column;
 
-                    if ( colIdx !== lastIdx ) {
-                        $( table.cells().nodes() ).removeClass( 'highlight' );
-                        $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
+                    if (colIdx !== lastIdx) {
+                        $(table.cells().nodes()).removeClass('highlight');
+                        $(table.column(colIdx).nodes()).addClass('highlight');
                     }
-                } )
-                .on( 'mouseleave', function () {
-                    $( table.cells().nodes() ).removeClass( 'highlight' );
-                } );
+                })
+                .on('mouseleave', function () {
+                    $(table.cells().nodes()).removeClass('highlight');
+                });
 
 
     </script>

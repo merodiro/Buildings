@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class SettingController extends Controller
 {
@@ -16,6 +17,7 @@ class SettingController extends Controller
 
     public function store(Request $request)
     {
+        Cache::forget('settings');
         foreach (array_except($request->toArray(), '_token') as $key => $req)
         {
             $setting = Setting::where('name', $key)->first();

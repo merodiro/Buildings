@@ -7,7 +7,7 @@
             @foreach($items as $building)
                 <div class="col-md-4">
                     <div class="productbox">
-                        <img src="http://lorempixel.com/460/250/" class="img-responsive">
+                        <img src="{{ checkIfImageExists($building->image) }}" class="img-responsive">
                         <div class="producttitle">{{ $building->name }}</div>
                         <p class="text-justify disc">{{ str_limit($building->short_description, 65) }}</p>
                         <div class="productprice">

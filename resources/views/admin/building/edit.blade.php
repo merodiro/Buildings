@@ -34,7 +34,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        {!! Form::model($building, ['url'=>'admin/buildings/'.$building->id , 'method'=>'PATCH', 'class' => 'form-horizontal']) !!}
+                        {!! Form::model($building, ['url'=>'admin/buildings/'.$building->id , 'method'=>'PATCH', 'class' => 'form-horizontal', 'files' => true]) !!}
                         @include('admin.building.form')
                         {!! Form::close() !!}
                     </div>

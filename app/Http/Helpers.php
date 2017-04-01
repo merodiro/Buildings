@@ -1,7 +1,10 @@
 <?php
 
 use App\Setting;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 function getSetting($setting = 'sitename')
 {
@@ -35,7 +38,9 @@ function building_status()
 
 function room_number()
 {
-    $arr = DB::table('buildings')->select('rooms')->orderBy('rooms')->distinct()->pluck('rooms')->toArray();
+    $arr = Cache::remember('rooms', 60, function () {
+       return DB::table('buildings')->select('rooms')->orderBy('rooms')->distinct()->pluck('rooms')->toArray();
+    });
     $arr = array_combine($arr, $arr);
     return $arr;
 }
@@ -84,4 +89,15 @@ function searchFields()
         'rent' => 'نوع العملية',
         'area' => 'المساحة'
     ];
+}
+
+function checkIfImageExists ($image) {
+    if ($image)
+    {
+        return Storage::url($image);
+    } else {
+        return config('settings.noimage');
+    }
+
+
 }

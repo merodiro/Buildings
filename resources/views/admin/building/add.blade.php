@@ -31,7 +31,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        {!! Form::open(['url' => 'admin/buildings', 'class' => 'form-horizontal', 'method' => 'post']) !!}
+                        {!! Form::open(['url' => 'admin/buildings', 'class' => 'form-horizontal', 'method' => 'post', 'files' => true]) !!}
                         @include('admin.building.form')
                         {!! Form::close() !!}
                     </div>

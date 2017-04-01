@@ -33,7 +33,7 @@ $factory->define(App\Building::class, function (Faker\Generator $faker) {
         'name' => $faker->sentence(3),
         'price' => $faker->randomNumber(5),
         'rent' => rand(0, 1),
-        'rooms' => $faker->randomNumber(2),
+        'rooms' => $faker->numberBetween(1, 50),
         'area' => $faker->randomNumber(3),
         'city' => rand(0, 25),
         'type' => rand(0, 2),
